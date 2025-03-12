@@ -1,0 +1,15 @@
+WITH orders AS (
+    SELECT 
+        id,
+        customer_id,
+        order_date,
+        total_amount
+    FROM {{ source('fivetran', 'orders') }}
+)
+SELECT 
+    id,
+    customer_id,
+    order_date,
+    total_amount,
+    total_amount * 1.1 AS total_with_tax
+FROM orders;
